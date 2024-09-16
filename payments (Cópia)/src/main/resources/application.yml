@@ -1,0 +1,25 @@
+spring:
+  application:
+    name: payment-ms
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3307/payments-db?createDatabaseIfNotExist=true
+    username: root
+    password:
+  jpa:
+    show-sql: true
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8081/eureka/
+  instance:
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+server:
+  port: 0
+resilience4j:
+  circuitbreaker:
+    instances:
+      confirmPaymentEndPoint:
+        slidingWindowSize: 3
+        minimumNumberOfCalls: 2
+        waitDurationInOpenState: 10s

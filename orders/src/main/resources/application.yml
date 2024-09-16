@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: order-ms
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3307/orders-db?createDatabaseIfNotExist=true
+    username: root
+    password:
+  jpa:
+    show-sql: true
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8081/eureka/
+  instance:
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+server:
+  port: 0
